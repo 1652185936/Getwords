@@ -8,7 +8,7 @@ AppPublisher=GetWords
 DefaultDirName={autopf}\GetWords
 DefaultGroupName=GetWords
 DisableProgramGroupPage=yes
-OutputDir=installer_out
+OutputDir=..\installer_out
 OutputBaseFilename=GetWords-Setup
 Compression=lzma2
 SolidCompression=yes
@@ -18,7 +18,6 @@ UninstallDisplayIcon={app}\GetWords.exe
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
