@@ -1,0 +1,4 @@
+# Extra dependencies for building/running the desktop app.
+# (the web app itself only needs requirements.txt)
+pyinstaller>=6.0
+pywebview>=5.0

@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 import tempfile
 import urllib.request
 from dataclasses import dataclass, asdict
@@ -185,27 +184,33 @@ def _parse_json3(data: dict) -> List[Segment]:
 
 def _fetch_via_ytdlp(video_id: str, preferred_lang: Optional[str]) -> TranscriptResult:
     url = f"https://www.youtube.com/watch?v={video_id}"
+    try:
+        import yt_dlp
+    except Exception:
+        raise TranscriptError(
+            "No transcript could be retrieved (yt-dlp is not available)."
+        )
+
     with tempfile.TemporaryDirectory() as tmp:
         out = str(Path(tmp) / "%(id)s.%(ext)s")
-        lang_arg = preferred_lang or "en.*,.*"
-        cmd = [
-            "yt-dlp",
-            "--skip-download",
-            "--write-subs",
-            "--write-auto-subs",
-            "--sub-langs", lang_arg,
-            "--sub-format", "json3",
-            "-o", out,
-            url,
-        ]
+        lang_list = [preferred_lang] if preferred_lang else ["en.*", ".*"]
+        ydl_opts = {
+            "skip_download": True,
+            "writesubtitles": True,
+            "writeautomaticsub": True,
+            "subtitleslangs": lang_list,
+            "subtitlesformat": "json3",
+            "outtmpl": out,
+            "quiet": True,
+            "no_warnings": True,
+            "ignoreerrors": True,
+            "socket_timeout": 30,
+        }
         try:
-            subprocess.run(cmd, capture_output=True, timeout=120, check=False)
-        except FileNotFoundError:
-            raise TranscriptError(
-                "No transcript could be retrieved (yt-dlp is not installed)."
-            )
-        except subprocess.TimeoutExpired:
-            raise TranscriptError("Timed out while downloading subtitles.")
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+        except Exception as e:  # noqa: BLE001
+            raise TranscriptError(f"Could not download subtitles: {e}")
 
         files = sorted(Path(tmp).glob("*.json3"))
         if not files:

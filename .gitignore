@@ -4,6 +4,9 @@ __pycache__/
 venv/
 env/
 *.log
+build/
+dist/
+*.manifest
 .DS_Store
 .idea/
 .vscode/

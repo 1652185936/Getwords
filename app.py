@@ -7,7 +7,9 @@ to TXT, SRT, or PDF.
 from __future__ import annotations
 
 import io
+import os
 import re
+import sys
 
 from flask import Flask, jsonify, render_template, request, send_file
 
@@ -18,7 +20,18 @@ from transcript_service import (
     get_transcript,
 )
 
-app = Flask(__name__)
+
+def resource_path(rel: str) -> str:
+    """Resolve a bundled resource both in dev and inside a PyInstaller build."""
+    base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base, rel)
+
+
+app = Flask(
+    __name__,
+    template_folder=resource_path("templates"),
+    static_folder=resource_path("static"),
+)
 
 
 @app.route("/")
