@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Subtitle Extractor</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>🎬 YouTube Subtitle Extractor</h1>
+  <p class="sub">Paste a YouTube link, grab the captions, export as TXT · SRT · PDF</p>
+</header>
+
+<main>
+  <section class="card">
+    <div class="input-row">
+      <input id="url" type="text" placeholder="https://www.youtube.com/watch?v=..."
+             autocomplete="off" spellcheck="false">
+      <button id="fetchBtn">Get Subtitles</button>
+    </div>
+    <div class="options-row">
+      <label for="lang">Language</label>
+      <select id="lang" disabled><option value="">Auto (best available)</option></select>
+      <label class="check"><input type="checkbox" id="ts"> Show timestamps</label>
+    </div>
+    <div id="status" class="status hidden"></div>
+  </section>
+
+  <section id="resultCard" class="card hidden">
+    <div class="result-head">
+      <div>
+        <h2 id="vidTitle"></h2>
+        <div id="meta" class="meta"></div>
+      </div>
+      <div class="exports">
+        <button class="exp" data-fmt="txt">⬇ TXT</button>
+        <button class="exp" data-fmt="srt">⬇ SRT</button>
+        <button class="exp" data-fmt="pdf">⬇ PDF</button>
+        <button id="copyBtn" class="ghost">⧉ Copy</button>
+      </div>
+    </div>
+    <div id="transcript" class="transcript"></div>
+  </section>
+</main>
+
+<footer>Captions via youtube-transcript-api with a yt-dlp fallback.</footer>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
