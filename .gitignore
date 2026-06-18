@@ -8,6 +8,12 @@ build/
 dist/
 *.manifest
 .DS_Store
+
+# Android / Buildozer
+mobile/.buildozer/
+mobile/bin/
+mobile/assets/cjk.ttf
+.buildozer/
 .idea/
 .vscode/
 *.pdf

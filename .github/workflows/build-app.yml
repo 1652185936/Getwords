@@ -7,6 +7,17 @@ on:
   push:
     branches: ["claude/youtube-subtitle-extractor-xlv0xp"]
     tags: ["v*"]
+    paths:
+      - "app.py"
+      - "desktop.py"
+      - "exporters.py"
+      - "transcript_service.py"
+      - "getwords.spec"
+      - "templates/**"
+      - "static/**"
+      - "requirements*.txt"
+      - "installer/**"
+      - ".github/workflows/build-app.yml"
   workflow_dispatch:
 
 permissions:
