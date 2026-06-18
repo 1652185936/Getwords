@@ -13,6 +13,10 @@ version = 1.0
 # need no recipes; openssl is pulled in for HTTPS.
 requirements = python3,kivy==2.3.0,android,pyjnius,openssl,requests,urllib3,idna,certifi,charset-normalizer,defusedxml,youtube-transcript-api,fpdf
 
+# Pin python-for-android to a release that ships Python 3.11. p4a master now
+# builds CPython 3.14, which Kivy 2.3.0's generated C code cannot compile.
+p4a.branch = 2024.01.21
+
 orientation = portrait
 fullscreen = 0
 

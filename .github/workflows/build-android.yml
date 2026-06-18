@@ -50,9 +50,9 @@ jobs:
           path: |
             ~/.buildozer
             mobile/.buildozer
-          key: buildozer-${{ runner.os }}-${{ hashFiles('mobile/buildozer.spec') }}
-          restore-keys: |
-            buildozer-${{ runner.os }}-
+          # 'v2' + spec hash: a clean key so we never restore the earlier
+          # broken Python-3.14 build tree.
+          key: buildozer-v2-${{ runner.os }}-${{ hashFiles('mobile/buildozer.spec') }}
 
       - name: Install Buildozer
         run: |
