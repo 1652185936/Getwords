@@ -1,5 +1,10 @@
 {
   "src": [
-    "pages/Index"
+    "pages/HomePage",
+    "pages/Index",
+    "pages/WordbookPage",
+    "pages/ReviewPage",
+    "pages/SpellPage",
+    "pages/WordDetailPage"
   ]
 }

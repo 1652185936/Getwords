@@ -9,7 +9,7 @@ import {
 } from '../services/Subtitles';
 import { translateLines } from '../services/Translate';
 import { buildHtml } from '../services/PdfExport';
-import { promptAction } from '@kit.ArkUI';
+import { promptAction, router } from '@kit.ArkUI';
 import { webview } from '@kit.ArkWeb';
 import { pasteboard } from '@kit.BasicServicesKit';
 import { fileIo as fs, picker } from '@kit.CoreFileKit';
@@ -38,13 +38,22 @@ struct Index {
   build() {
     Stack() {
       Column() {
+      Row() {
+        Text('‹ 返回').fontSize(15).fontColor('#1A73E8')
+          .onClick(() => {
+            router.back();
+          })
+        Blank()
+      }
+      .width('92%').constraintSize({ maxWidth: 720 }).margin({ top: 12 })
+
       Text('🎬 GetWords 字幕提取')
         .fontSize(22)
         .fontWeight(FontWeight.Bold)
-        .margin({ top: 18, bottom: 10 })
+        .margin({ top: 4, bottom: 10 })
 
       TextInput({ placeholder: '粘贴 YouTube 链接，例如 https://youtu.be/...', text: this.url })
-        .width('92%')
+        .width('92%').constraintSize({ maxWidth: 720 })
         .height(46)
         .onChange((value: string) => {
           this.url = value;
@@ -65,7 +74,7 @@ struct Index {
             this.onTranslate();
           })
       }
-      .width('92%')
+      .width('92%').constraintSize({ maxWidth: 720 })
       .margin({ top: 12 })
 
       Row() {
@@ -90,7 +99,7 @@ struct Index {
             this.showKey = !this.showKey;
           })
       }
-      .width('92%')
+      .width('92%').constraintSize({ maxWidth: 720 })
       .margin({ top: 10 })
 
       if (this.showKey) {
@@ -109,7 +118,7 @@ struct Index {
               promptAction.showToast({ message: 'Key 已保存' });
             })
         }
-        .width('92%')
+        .width('92%').constraintSize({ maxWidth: 720 })
         .margin({ top: 8 })
       }
 
@@ -117,7 +126,7 @@ struct Index {
         Text(this.status)
           .fontSize(13)
           .fontColor('#888888')
-          .width('92%')
+          .width('92%').constraintSize({ maxWidth: 720 })
           .margin({ top: 8 })
       }
 
@@ -151,7 +160,7 @@ struct Index {
         }, (seg: Segment, index: number) => index.toString() + '-' + seg.start.toString())
       }
       .layoutWeight(1)
-      .width('92%')
+      .width('92%').constraintSize({ maxWidth: 720 })
       .margin({ top: 10 })
       .alignListItem(ListItemAlign.Start)
       .scrollBar(BarState.Auto)
@@ -181,7 +190,7 @@ struct Index {
             this.onCopy();
           })
       }
-      .width('92%')
+      .width('92%').constraintSize({ maxWidth: 720 })
       .margin({ top: 10, bottom: 16 })
       }
       .width('100%')
