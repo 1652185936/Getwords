@@ -1,0 +1,7 @@
+{
+  "modelVersion": "5.0.0",
+  "name": "getwords",
+  "version": "1.0.0",
+  "description": "GetWords — YouTube subtitle extractor for HarmonyOS NEXT",
+  "dependencies": {}
+}
