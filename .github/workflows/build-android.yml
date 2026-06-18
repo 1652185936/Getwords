@@ -57,7 +57,7 @@ jobs:
       - name: Fetch pinned python-for-android (Python 3.11)
         run: |
           git clone https://github.com/kivy/python-for-android.git "$HOME/p4a-src"
-          git -C "$HOME/p4a-src" checkout 2024.01.21
+          git -C "$HOME/p4a-src" checkout v2024.01.21
           echo "p4a python3 recipe version:"
           grep -m1 "version = " "$HOME/p4a-src/pythonforandroid/recipes/python3/__init__.py"
 
