@@ -16,8 +16,23 @@ ArkTS / ArkUI 原生应用:粘贴 YouTube 链接 → 联网获取字幕 → 屏�
 3. 一台**纯血鸿蒙手机**,在「设置 → 系统和更新 → 开发者选项」里打开
    **USB 调试**(开发者选项需先在「关于手机」里连点版本号解锁)。
 
+## ⚠️ 最关键的一步:打开「正确的文件夹」
+DevEco **必须**打开鸿蒙工程那一层(含 `build-profile.json5` 的目录),也就是:
+
+```
+D:\worksace\other\Getwords\harmony\GetWords     ← 打开这个
+```
+
+**不要**打开仓库根目录 `D:\worksace\other\Getwords`(那里面混着网页/安卓/鸿蒙,
+DevEco 不认,会报「选择一个 OpenHarmony 或 HarmonyOS 项目」)。
+
+> 如果嫌路径深,可以直接把 `harmony\GetWords` 整个文件夹**剪切/复制**到别处
+> (例如 `D:\GetWords`)再用 DevEco 打开,效果一样。
+
 ## 编译 & 安装步骤
-1. 打开 DevEco Studio → **File → Open** → 选择本目录下的 `GetWords/` 文件夹。
+1. 打开 DevEco Studio → **File → Open** → 选择 `...\harmony\GetWords` 文件夹
+   (见上方说明)。打开后点提示里的 **Sync Now**,DevEco 会自动生成 `hvigorw`、
+   下载 `oh_modules`、生成 `local.properties` 等(需要联网)。
 2. 第一次打开会自动 **Sync**(下载 oh_modules、生成 hvigor 包装器),等它跑完。
 3. 顶部菜单 **File → Project Structure → Signing Configs** → 勾选
    **Automatically generate signature**,登录你的华为账号,等它生成证书。
