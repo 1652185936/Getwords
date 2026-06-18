@@ -7,6 +7,8 @@ const DOMAIN: number = 0x0000;
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(DOMAIN, 'GetWords', 'Ability onCreate');
+    // 持久化 DeepSeek API Key，跨启动保留
+    PersistentStorage.persistProp('dsKey', '');
   }
 
   onDestroy(): void {
